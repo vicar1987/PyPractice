@@ -1,7 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
+import pymongo
 import pandas as pd
 import csv
+import json
+
+client = pymongo.MongoClient("mongodb+srv://vicar1987:1ul3u03nji3@twfruit.i2omj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+db = client.TWFruits
+test = db.test
 
 form_data = {
     'keyword': '香蕉',
@@ -60,4 +66,10 @@ for j in range(len(link)):
 
 dict = {'文號': ID, '發布日期': date, '標題': title, '發布機關': author, '網址': link, '內容': content}
 df = pd.DataFrame(dict)
-df.to_csv('農委會新聞_香蕉.csv')
+df.to_csv('測試用新聞_香蕉.csv', index=False)
+
+data = pd.read_csv('測試用新聞_香蕉.csv',encoding = 'UTF-8')
+data_json = json.loads(data.to_json(orient='records'))
+test.insert_many(data_json)
+
+client.close()
