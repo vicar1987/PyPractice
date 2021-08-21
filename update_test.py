@@ -5,8 +5,8 @@ import pandas as pd
 import csv
 import json
 
-client = pymongo.MongoClient("mongodb+srv://vicar1987:1ul3u03nji3@twfruit.i2omj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-db = client.TWFruits
+client = pymongo.MongoClient("mongodb+srv://<username>:<password>@<project_name>.i2omj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+db = client.<db_name>
 test = db.test
 
 form_data = {
